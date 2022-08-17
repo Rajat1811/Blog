@@ -1,0 +1,27 @@
+{% include 'blog/base.html' %}
+    <style>
+        body{
+            font-style: italic;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        
+        .shadow{
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+        }
+    </style>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="card shadow m-5 col-sm-5">
+            <div class="card-body ">
+                <h3 style="color: red;">Edit Post</h3>
+                <hr>
+                <form   action="" method="post" enctype="multipart/form-data">
+                    {{form.as_p}}
+                    <input class="btn btn-secondary" type="submit" value="update">
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-3"></div> 
+    </div>       
+</div>

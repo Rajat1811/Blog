@@ -1,0 +1,33 @@
+{% include 'blog/base.html' %}
+<style>
+    .shadow{
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    }
+</style>
+<div class="container mt-4">
+    <div class="row">
+       
+        <div class="card shadow col-md-5 mt-4 pr-0 pl-0 ml-4">
+            <img class="card-img-top" src="{{obj.image.url}}" alt="Card image cap"  height="300px">
+            <div class="card-body">
+            <strong class="card-title h4">{{obj.title}}</strong>
+            <pre>     -by {{user}}</pre>
+            <p class="card-text">{{obj.description}}</p>
+            <small>{{obj.on_published}}</small>
+            </div>
+            <div class="card-footer">
+            <small class="text-muted"> <a href="{% url 'add_comment' obj.pk %}"> Add comments</a></small>
+            </div>
+        </div>
+        <div class="card shadow col-md-5 mt-4 pr-0 pl-0 ml-5">
+            <div class="card-body">
+                {% for details in detail %}
+                <strong>{{details.user}}</strong><br>
+                {{details.body}} <br>
+                {{details.date_added}} <br><br>
+            
+            {% endfor %}
+            </div>
+        
+    </div>
+</div>

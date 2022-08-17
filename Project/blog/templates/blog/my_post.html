@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body{
+            font-style: italic;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+       
+        
+        .shadow{
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+        }
+    </style>
+        
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Blogging Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Features
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- <a class="dropdown-item" href="{% url 'my_post' %}">My Post</a> -->
+                <a class="dropdown-item" href="{% url 'all_post' %}">All Post</a>
+                <a class="dropdown-item" href="{% url 'create_post' %}">Create Post</a>
+                <a class="dropdown-item" href="{% url 'emp_home' %}">Profile page</a>
+                <a class="dropdown-item" href="{% url 'change_pass' %}">Change Password</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+
+              </div>
+            </li>
+            
+          </ul>
+          
+        </div>
+      </nav> 
+    <h1 class="text-center">My Post</h1>
+    
+    <div class="container">
+        <div class="row mt-5 ml-2">
+            <div class=" col-lg-2">
+                <div class="list-group">
+                    <a href="{% url 'my_post' %}" class="list-group-item list-group-item-action" aria-current="true">
+                      My Post
+                    </a>
+                    <a href="{% url 'my_postdata' 'published' %}" class="list-group-item list-group-item-action" aria-current="true">Published Post</a>
+                    <a href="{% url 'my_postdata' 'unpublished' %}" class="list-group-item list-group-item-action " aria-current="true">Unpublished Post</a>
+                    
+                    
+                  </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="row">
+                    {% for details in detail%}
+                    <div class="card shadow col-sm-12 mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="{{details.image.url}}" alt="img3" width="120px" height="120px">
+                                </div>
+                                <div class="col-md-8">
+                                    <h4>{{details.title}}</h4>
+                                    <p>{{details.description}}</p>
+                                    <small>{{details.on_published}}</small><br>
+                                    <a class="btn btn-success" href="{% url 'edit_post' details.id%}">Edit</a>
+                                    <a class="btn btn-danger" href="{% url 'delete_post' details.id%}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+   
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{% include 'blog/header.html' %}
+<style>
+    
+    .shadow{
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="card shadow m-5 col-sm-5">
+            <div class="card-body ">
+                <h3 style="color: red;">Create Account</h3>
+                <hr>
+                <form action="" method="post">
+                    
+                            {% for form in form %}
+                            {{form.label_tag}}{{form}}{{form.errors}}
+                            {% endfor %} <br>
+                            <input type="submit" class="btn btn-secondary" value="register">
+                    
+                    
+                </form>
+                
+
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>

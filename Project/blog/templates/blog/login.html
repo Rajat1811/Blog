@@ -1,0 +1,21 @@
+{% include 'blog/header.html' %}
+<style>
+    .container{
+        margin-left: 350px;
+        margin-top: 100px;
+    }
+</style>
+<div class="container">
+    <div class="card shadow m-5 col-sm-6">
+        <div class="card-body ">
+            <h3 style="color: red;">User Login</h3>
+            <hr>
+            <form action="" method="post">
+                {% for form in form %}
+                {{form.label_tag}}{{form}}{{form.errors}} <br>
+                {% endfor %} <br>
+                <input type="submit" class="btn btn-secondary" value="login">
+            </form>
+        </div>
+    </div>
+</div>

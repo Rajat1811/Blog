@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    body {
+      font-style: italic;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    .shadow {
+      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+
+  <title>All Post</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Blogging Website</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Features
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'my_post' %}">My Post</a>
+            <a class="dropdown-item" href="{% url 'all_post' %}">All Post</a>
+            <a class="dropdown-item" href="{% url 'create_post' %}">Create Post</a>
+            <a class="dropdown-item" href="{% url 'emp_home' %}">Profile page</a>
+            <a class="dropdown-item" href="{% url 'change_pass' %}">Change Password</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+
+          </div>
+        </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="/employee/search" method="get">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="query"
+          name="query">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+    </div>
+  </nav>
+  <h1 class="text-center">All Post</h1>
+  {% for details in page_obj%}
+  <div class="container row1">
+    <div class="row mt-5 ml-5">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <img src="{{details.image.url}}" alt="img3" width="120px" height="120px">
+              </div>
+              <div class="col-md-8">
+                <h4><a href="{% url 'detailview' details.id %}">{{details.title}}</a></h4>
+                <pre>     -by {{details.user}}</pre>
+                <p>{{details.description}}</p>
+                <small>{{details.on_published}}</small>
+                <br>
+                <form action="{% url 'like_post' %}" method="post">
+                  <input type="hidden" name="post_id" value="{{details.id}}">
+                  {% if user not in details.liked.all %}
+                  <br> <button class="btn btn-danger" type="submit">Like</button>
+                  {% else %}
+                  <button type="submit" class="btn btn-primary">Unlike</button>
+                  {% endif %}
+                </form>
+                <strong>{{details.liked.all.count}} likes</strong>
+                <br><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+  {% endfor %}
+   <br>
+  <center>
+  <span>
+    {% if page_obj.has_previous %}
+    <button><a href="?page={{page_obj.previous_page_number}}">Previous</a></button>
+    {% endif %} </span>
+  <span>{{page_obj.number}}</span>
+  <span>
+    {% if page_obj.has_next %}
+    <button><a href="?page={{page_obj.next_page_number}}">Next</a></button {% endif %} </span>
+  </center>
+  <br><br>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>
